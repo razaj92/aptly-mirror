@@ -1,0 +1,17 @@
+aptly:
+  endpoint: s3:euwest
+
+gpg:
+  key: XXXXXX
+  servers:
+    - keys.gnupg.net
+    - pgp.mit.edu
+    - pool.sks-keyservers.net
+
+repos:
+  - name: app
+    url: https://download.app.com/linux/apt
+    release: xenial
+    components: main
+    arch: amd64
+    gpgkeys: XXXX1234
