@@ -50,3 +50,19 @@ repos:
     arch: [supported architectures]
     gpgkeys: [repo public gpg id]
 ```
+
+## Docker
+
+You can run the mirrors from a container too. To do so you need to provide GPG Keys for publishing or it will generate its own dummy ones. If you want to use your own you can provide them, along with the config files on the following paths:
+
+```
+docker run --rm \
+  -v mykey.pub:/gpg_pub.gpg \
+  -v mykey.key:/gpg_key.gpg  \
+  -v aptly_mirrors.yml:/etc/aptly_mirrors.yml \
+  -v aptly.conf:/etc/aptly.conf \
+  razaj92/aptly-mirror run
+```
+
+You can also choose to mount a current aptly database as a volume to `/var/lib/aptly` if you want the data to persist across runs.
+if you dont wish to provide exported gpg keys, you can also mount your .gnupg folder with the keyrings and pass through the location as the `GNUPGHOME` env var.
