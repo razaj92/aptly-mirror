@@ -15,7 +15,7 @@ FROM alpine:latest
 ENV APTLY_VERSION 1.2.0
 ENV GNUPGHOME /var/lib/aptly/gpg
 
-RUN apk --no-cache --progress add git curl bzip2 gnupg1 && \
+RUN apk --no-cache --progress add git curl bzip2 gnupg1 xz && \
     mkdir -p /app/aptly && \
     curl -L https://bintray.com/artifact/download/smira/aptly/aptly_${APTLY_VERSION}_linux_amd64.tar.gz | tar zx -C /app/aptly --strip-components=1 && \
     ln -s /app/aptly/aptly /usr/bin/aptly && \
