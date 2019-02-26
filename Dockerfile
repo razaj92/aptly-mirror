@@ -22,8 +22,12 @@ RUN apk --no-cache --progress add git curl bzip2 gnupg1 xz && \
     rm -rf /var/cache/apk/*
 
 COPY --from=build /go/src/github.com/razaj92/aptly-mirror/aptly-mirror /usr/local/bin/
-
 COPY files/entrypoint.sh /
+
+RUN addgroup -S -g 501 aptly \
+&& adduser -S -s /bin/bash -u 501 -G aptly -h /var/lib/aptly aptly > /dev/null 2>&1
+
+USER 501:501
 
 VOLUME 	/var/lib/aptly
 
